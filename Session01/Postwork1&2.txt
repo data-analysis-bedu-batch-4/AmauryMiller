@@ -1,0 +1,50 @@
+echo --Bienvenido al Postwork 1 de Amaury--
+echo 
+echo La ruta donde empezare a guardar el proyecto sera la siguiente:
+pwd
+echo 
+echo Procedere a crear un nuevo directorio llamado MiProyectoAm
+mkdir MiProyectoAm
+cd MiProyectoAm
+echo Dentro extraere información referente a peliculas,la descomprimire y removere el archivo ZIP.
+curl -O http://files.grouplens.org/datasets/movielens/ml-1m.zip
+unzip ml-1m.zip
+ls
+rm ml-1m.zip
+ls
+cd ml-1m
+echo Veamos la estructura de nuestros datos
+cat movies.dat
+echo 
+echo Podemos ver un raro patron de 2 puntos el cual procedere a cambiarlo por comas y guardarlo en CSV dejando intacto los archivos originales.
+sed 's/::/,/g' movies.dat >movies.csv
+sed 's/::/,/g' ratings.dat >ratings.csv
+sed 's/::/,/g' users.dat >users.csv
+
+echo Revisemos nuestros archivos CSV ya modificados.
+echo Usando Head en movies.csv
+head movies.csv
+echo Usando Tail en ratings.csv
+tail ratings.csv
+echo En la sección de movies.csv veremos cuantas peliculas fueron del genero Musical
+grep ,Musical movies.csv |wc
+echo y tambien de Romance
+grep ,Romance movies.csv |wc
+echo
+echo Busquemos un dato unico. Una persona menor de 18 años ya retirada
+grep ,1,13, users.csv
+echo
+echo Veamos las peliculas que mejor puntuo
+grep "4413", ratings.csv | grep ,5,
+echo
+echo El listado es el siguiente:
+grep '3792,\|1952,\|1959,\|2622,\|2396,\|2706,' movies.csv
+echo
+echo A un joven menor de 18 retirado le gusta el romance y los vaqueros
+echo
+echo
+echo Una vez terminado guardemos una copia del ejercicio.
+cd ..
+cd ..
+cp -r MiProyectoAm ./MiProyectoAmCOPIA
+echo Gracias!
