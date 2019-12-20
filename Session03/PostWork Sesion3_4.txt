@@ -1,0 +1,21 @@
+CREATE DATABASE POSTWORK_AMAURYUSE POSTWORK_AMAURY
+CREATE TABLE test (VisitNumber DOUBLE,Weekday VARCHAR(30),Upc VARCHAR(15),ScanCount INT,DepartmentDescription VARCHAR(60),FinelineNumber VARCHAR(10));
+LOAD DATA LOCAL INFILE 'test.csv' INTO TABLE test fields terminated by ',' ignore 1 lines;
+CREATE TABLE train (TripType INT,VisitNumber DOUBLE,Weekday VARCHAR(30),Upc VARCHAR(15),ScanCount INT,DepartmentDescription VARCHAR(60),FinelineNumber VARCHAR(10));
+LOAD DATA LOCAL INFILE 'train.csv' INTO TABLE train into table train fields terminated by ',' ignore 1 lines;
+
+
+##Consultas##
+
+1.-Transacciones por Semana en el Data set
+select train.Weekday,train.TripType, count(train.TripType) as conteo from train
+                                         where train.DepartmentDescription like "%SHOES%" GROUP BY train.Weekday,train.
+                                        TripType order by conteo desc;
+
+2.- Determinar el tipo de clasificador y su recurrencia por dia de la semanaselect train.Weekday,train.TripType, count(train.TripType) as conteo from train
+                                         where train.DepartmentDescription like "%SHOES%" GROUP BY train.Weekday,train.
+                                        TripType order by conteo desc;
+3.- Conteo de articulos unicos por categoria
+select train.Weekday,train.TripType, count(train.TripType) as conteo from train
+                                         where train.DepartmentDescription like "%SHOES%" GROUP BY train.Weekday,train.
+                                        TripType order by conteo desc;
